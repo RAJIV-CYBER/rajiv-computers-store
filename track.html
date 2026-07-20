@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Order | Rajiv Computers</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700;900&display=swap');
+        body { font-family: 'Space Grotesk', sans-serif; background-color: #030305; color: #f4f4f5; overflow-x: hidden; }
+        .glass-panel { background: rgba(10, 10, 15, 0.75); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .hidden-section { display: none !important; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col relative">
+
+    <!-- Navbar -->
+    <nav class="glass-panel sticky top-0 z-50 border-b border-zinc-800">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-3 cursor-pointer" onclick="window.location.href='index.html'">
+                <div class="bg-gradient-to-br from-blue-600 to-blue-800 p-2.5 rounded-xl shadow-[0_0_15px_rgba(37,99,235,0.5)]">
+                    <i class="ph-bold ph-cpu text-2xl text-white"></i>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-black tracking-tighter leading-none text-white">RAJIV</h1>
+                    <span class="text-blue-500 text-[10px] font-black tracking-[0.3em] uppercase">Computers</span>
+                </div>
+            </div>
+            <a href="index.html" class="bg-zinc-900 border border-zinc-800 hover:border-blue-500 text-white font-bold px-6 py-2.5 rounded-full transition-all flex items-center gap-2 text-sm">
+                <i class="ph-bold ph-arrow-left"></i> Back to Store
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Tracker Area -->
+    <main class="max-w-3xl mx-auto px-6 py-20 flex-1 w-full">
+        <div class="text-center mb-10">
+            <span class="bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-widest mb-4 inline-block">
+                Live Status Portal
+            </span>
+            <h2 class="text-4xl font-black text-white mb-4">Track Your Hardware Build</h2>
+            <p class="text-zinc-400 text-sm">Enter your Order ID (try demo ID: <span class="text-blue-400 font-bold">RC-98421</span>)</p>
+        </div>
+
+        <!-- Search Input Box -->
+        <div class="glass-panel p-4 rounded-2xl border border-zinc-800 flex gap-3 mb-10">
+            <input type="text" id="order-input" placeholder="Enter Order ID (e.g. RC-98421)" class="w-full bg-black/60 border border-zinc-800 rounded-xl px-5 py-4 text-white outline-none focus:border-blue-500 font-mono tracking-wider">
+            <button onclick="trackOrder()" class="bg-blue-600 hover:bg-blue-500 text-white font-black px-8 py-4 rounded-xl transition flex items-center gap-2">
+                <i class="ph-bold ph-magnifying-glass"></i> Track
+            </button>
+        </div>
+
+        <!-- Result Card (Hidden by default) -->
+        <div id="result-card" class="hidden-section glass-panel p-8 rounded-3xl border border-zinc-800 space-y-8">
+            <div class="flex flex-col sm:flex-row justify-between border-b border-zinc-800 pb-6 gap-4">
+                <div>
+                    <span class="text-xs text-zinc-500 uppercase font-bold">Order ID</span>
+                    <h3 id="res-id" class="text-xl font-black text-white font-mono">#RC-98421</h3>
+                </div>
+                <div>
+                    <span class="text-xs text-zinc-500 uppercase font-bold">Item Config</span>
+                    <p id="res-item" class="text-sm font-bold text-blue-400">Custom Liquid-Cooled RTX 4080 Rig</p>
+                </div>
+                <div>
+                    <span class="text-xs text-zinc-500 uppercase font-bold">Status</span>
+                    <p id="res-status" class="text-sm font-bold text-emerald-400">● In Stress Testing Phase</p>
+                </div>
+            </div>
+
+            <!-- Timeline Steps -->
+            <div class="space-y-6 relative before:absolute before:inset-0 before:left-4 before:w-0.5 before:bg-zinc-800">
+                <div class="flex items-center gap-4 relative">
+                    <div class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-xs z-10 shadow-[0_0_10px_rgba(37,99,235,0.8)]"><i class="ph-bold ph-check"></i></div>
+                    <div><h4 class="font-bold text-white text-sm">Order Placed & Verified</h4><p class="text-xs text-zinc-500">Components locked in inventory</p></div>
+                </div>
+                <div class="flex items-center gap-4 relative">
+                    <div class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-xs z-10 shadow-[0_0_10px_rgba(37,99,235,0.8)]"><i class="ph-bold ph-check"></i></div>
+                    <div><h4 class="font-bold text-white text-sm">Assembly & Cable Management</h4><p class="text-xs text-zinc-500">Rig built by master technicians</p></div>
+                </div>
+                <div class="flex items-center gap-4 relative">
+                    <div class="w-8 h-8 rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/40 flex items-center justify-center font-bold text-xs z-10 animate-pulse">3</div>
+                    <div><h4 class="font-bold text-white text-sm">24-Hour Thermal Stress Testing</h4><p class="text-xs text-zinc-500">Running benchmarks (FurMark & Prime95)</p></div>
+                </div>
+                <div class="flex items-center gap-4 relative">
+                    <div class="w-8 h-8 rounded-full bg-zinc-800 text-zinc-500 flex items-center justify-center font-bold text-xs z-10">4</div>
+                    <div><h4 class="font-bold text-zinc-500 text-sm">Secure Dispatch & Delivery</h4><p class="text-xs text-zinc-600">Pending courier pickup</p></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Error Box -->
+        <div id="error-box" class="hidden-section p-4 bg-red-500/10 border border-red-500/30 rounded-2xl text-red-400 text-center font-bold text-sm">
+            ❌ Order ID not found. Please check your receipt or use demo ID: <span class="text-white underline">RC-98421</span>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-zinc-800 bg-[#020202] py-8 text-center">
+        <p class="text-zinc-600 text-xs">© 2026 Rajiv Computers. Secure Order Tracking System.</p>
+    </footer>
+
+    <script>
+        function trackOrder() {
+            const val = document.getElementById('order-input').value.trim();
+            const card = document.getElementById('result-card');
+            const err = document.getElementById('error-box');
+
+            if(val === 'RC-98421' || val === '#RC-98421') {
+                card.classList.remove('hidden-section');
+                err.classList.add('hidden-section');
+            } else {
+                card.classList.add('hidden-section');
+                err.classList.remove('hidden-section');
+            }
+        }
+    </script>
+</body>
+</html>
